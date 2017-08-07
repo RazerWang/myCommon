@@ -65,7 +65,7 @@
 			var thisWidth = obj.width()/2-30;
             var thisHeight = obj.height()/2-30;
             obj.css('position','relative');
-            var loadingDiv = '<div class="loadingDiv" style="width:'+obj.width()+'px;height:'+obj.height()+'px;"><div id="loading-center-absolute" ><div class="object" id="object_four"></div><div class="object" id="object_three"></div><div class="object" id="object_two"></div><div class="object" id="object_one"></div></div></div>';
+            var loadingDiv = '<div class="loadingDiv" style="width:'+obj.width()+'px;height:'+obj.height()+'px;background-color:rgba(0,0,0,0.3);"><div id="loading-center-absolute" ><div class="object" id="object_four"></div><div class="object" id="object_three"></div><div class="object" id="object_two"></div><div class="object" id="object_one"></div></div><div class="loading_tips">加载中，请稍后...</div></div>';
 			obj.append(loadingDiv);
 		};
 		this.loadingStop = function(obj){

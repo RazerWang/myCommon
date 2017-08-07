@@ -23,8 +23,8 @@
 	border-left:  5px solid #FFF;
 	border-right: 5px solid transparent;
 	
-	-webkit-animation: animate 2s infinite;
-	animation: animate 2s infinite;	
+	-webkit-animation: animate 3s infinite;
+	animation: animate 3s infinite;	
 
 	}
 #object_one{
@@ -60,7 +60,16 @@
     animation-delay: 0.6s;
 	
 	}	
-
+.loading_tips{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 200px;
+	margin-top: 60px;
+	margin-left: -100px;
+	text-align: center;
+	color:#fff;
+}
 @-webkit-keyframes animate {
  
 
