@@ -73,79 +73,6 @@
 		};
 
         /**
-		 * 判断是否存在
-         * @param str
-         * @returns {boolean}
-         */
-		this.isEmpty = function(str){
-            return (!str || str.length == 0);
-        };
-
-        /**
-		 * 判断为空返回""
-         * @param str
-         * @returns {*}
-         */
-		this.nullToEmpty = function(str){
-            if(str==null){
-                return "";
-            }
-            else{
-                return str;
-            }
-        };
-
-        /**
-		 * 去除空格
-         * @param str
-         * @returns {XML|void|string}
-         */
-		this.trim = function(str){
-			return str.replace(/(^\s*)|(\s*$)/g, "");
-		};
-
-        /**
-		 * 去除逗号
-         * @param str
-         * @returns {XML|void|string}
-         */
-		this.delDou = function(str){
-			if(typeof(str)=="number"){
-				str = str.toString();
-			}
-			return str.replace(/,/g, "");
-		};
-
-        /**
-		 * 格式化大数字
-         * @param type
-         * @param money
-         * @returns {string}
-         */
-		this.formatMoneyUnit = function (type,money){
-			// 表示为不需要保留2位小数
-			if(type==0){
-				if(money>100000000){
-					return money*1000/100000000000 + '亿';
-				}
-				else if(money>=10000){
-					return money/10000 + '万';
-				}else{
-					return money + '';
-				}
-			}else{
-				if(money>100000000){
-					return (money*1000/100000000000).toFixed(2) + '亿';
-				}
-				else if(money>=10000){
-					return (money/10000).toFixed(2) + '万';
-				}else{
-					return (money).toFixed(2) + '';
-				}
-			}
-		};
-
-        /**
 		 * 检查返回数据
          * @param result
          * @returns {boolean}
@@ -297,9 +224,110 @@
 		    return s < 10 ? '0' + s: s;
 		};
 
+        /**
+         * 判断是否存在
+         * @param str
+         * @returns {boolean}
+         */
+        this.isEmpty = function(str){
+            return (!str || str.length === 0);
+        };
 
+        /**
+         * 判断为空返回""
+         * @param str
+         * @returns {*}
+         */
+        this.nullToEmpty = function(str){
+            if(str===null){
+                return "";
+            }
+            else{
+                return str;
+            }
+        };
 
-	}
+        /**
+         * 去除空格
+         * @param str
+         * @returns {XML|void|string}
+         */
+        this.trim = function(str){
+            return str.replace(/(^\s*)|(\s*$)/g, "");
+        };
+
+        /**
+         * 去除逗号
+         * @param str
+         * @returns {XML|void|string}
+         */
+        this.delDou = function(str){
+            if(typeof(str)==="number"){
+                str = str.toString();
+            }
+            return str.replace(/,/g, "");
+        };
+
+        /**
+         * 格式化大数字
+         * @param type
+         * @param money
+         * @returns {string}
+         */
+        this.formatMoneyUnit = function (type,money){
+            // 表示为不需要保留2位小数
+            if(money>100000000){
+                return (money*1000/100000000000).toFixed(type) + '亿';
+            }
+            else if(money>=10000){
+                return (money/10000).toFixed(type) + '万';
+            }else{
+                return (money/1).toFixed(type) + '';
+            }
+        };
+
+        /**
+		 * 千分位格式化数字
+		 * @param s 数字
+		 * @param n 保留小数位
+		 * **/
+        this.thousandsFixedNumber = function (s,n) {
+            n = n > 0 && n <= 20 ? n : 2;
+            s = parseFloat((s + '').replace(/[^\d\.-]/g, '')).toFixed(n) + '';
+            var l = s.split('.') [0].split('').reverse(),
+                r = s.split('.') [1];
+            var  t = '';
+            for (var i = 0; i < l.length; i++)
+            {
+                t += l[i] + ((i + 1) % 3 == 0 && (i + 1) != l.length ? ',' : '');
+            }
+            return t.split('').reverse().join('') + '.' + r;
+        }
+
+        /**
+         * 检查浏览器内核
+         * **/
+        this.checkNavigatorAgent = function () {
+            return {
+                versions: function() {
+                    var u = navigator.userAgent;
+                    return {
+                        trident: u.indexOf('Trident') > -1, //IE内核
+                        presto: u.indexOf('Presto') > -1, //opera内核
+                        webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+                        gecko: u.indexOf('Firefox') > -1, //火狐内核Gecko
+                        mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+                        ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios
+                        android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android
+                        iPhone: u.indexOf('iPhone') > -1 , //iPhone
+                        iPad: u.indexOf('iPad') > -1, //iPad
+                        webApp: u.indexOf('Safari') > -1 //Safari
+                    };
+                }()
+            };
+        };
+
+    }
 	var commonFnObj = new commonFn();
 	window.$commonObj = commonFnObj;
 })(window);

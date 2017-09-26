@@ -1,4 +1,7 @@
-.loadingDiv{background-color:;}
+.loadingDiv{
+	z-index: 999;
+	position: absolute;
+}
 
 #loading-center-absolute {
 	position: absolute;
