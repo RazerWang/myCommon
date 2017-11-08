@@ -327,6 +327,16 @@
             };
         };
 
+        /**
+         * 判断是否是空对象
+         * @param obj 目标对象
+         * **/
+        this.isEmptyObject = function(obj) {
+            for (var i in obj){
+                return false;//返回false，不为空对象
+            }
+            return true;//返回true，为空对象
+        }
     }
 	var commonFnObj = new commonFn();
 	window.$commonObj = commonFnObj;
